@@ -7,4 +7,4 @@
 * npm install express
 
 ### Optional:
-* npm install nodemon
+* npm install nodemon (automatically restarts server after save)
