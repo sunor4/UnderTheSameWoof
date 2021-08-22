@@ -5,3 +5,6 @@
 * npm install body-parser
 * npm install ejs
 * npm install express
+
+### Optional:
+* npm install nodemon
