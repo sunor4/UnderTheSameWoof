@@ -3,6 +3,7 @@ const { send } = require('process');
 const path = require('path');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+const authRoutes = require('./routes/auth');
 const errorController = require('./controllers/error');
 
 const app = express();
@@ -13,10 +14,9 @@ app.set('views', 'views'); // not necessary as our views folder is already set u
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(authRoutes);
 app.use('/admin', adminRoutes.routes);
-
 app.use(shopRoutes);
-
 app.use(errorController.get404);
 
 app.listen(3000);
