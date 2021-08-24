@@ -1,6 +1,8 @@
 const express = require('express');
 const { send } = require('process');
 const path = require('path');
+const session = require('express-session');
+
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
@@ -13,6 +15,13 @@ app.set('views', 'views'); // not necessary as our views folder is already set u
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session(
+    {
+        secret: 'secret', 
+        resave: false, 
+        saveUninitialized: false,
+    })
+);
 
 app.use(authRoutes);
 app.use('/admin', adminRoutes.routes);
