@@ -37,10 +37,10 @@ module.exports = class Cart {
         });
     }
 
-    static deleteProduct(productId, productPrice) {
+    static removeProduct(productId, productPrice) {
         fs.readFile(cartPath, (err, fileContent) => {
             if (err) {
-                return
+                return;
             }
             
             const cart = JSON.parse(fileContent);
