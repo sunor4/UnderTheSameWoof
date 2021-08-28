@@ -81,6 +81,10 @@ exports.getOrders = (req, res, next) => {
     });
 };
 
+exports.postOrder = (req, res, next) => {
+    // TODO: adding product to user's cart.
+};
+
 exports.postCartRemoveItem = (req, res, next) => {
     const prodId = req.body.productId;
     Product.getProductById(prodId, product => {
