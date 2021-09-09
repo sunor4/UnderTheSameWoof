@@ -6,32 +6,39 @@ exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
         path: '/login',
         pageTitle: 'Login',
-        isAuthenticated: req.session.isLoggedIn
+        errorMessage: req.flash('error')
     });
 };
 
 exports.postLogin = (req, res, next) => {
-    /** TODO:
-     * 1. Store new sessions in file db so we'll be able to track them (maybe there's a built-in way to do this).
-     */
-
     const email = req.body.email;
     const password = req.body.password;
+    const remember = req.body.remember;
+    const cookieShouldPersist = (remember === "on"); // TODO: set session time accordingly
+    
     User.findUserByEmail(email, existingUser => {
         if (!existingUser) {
-            res.redirect('/');
+            req.flash('error', 'Invalid email.');
+            res.redirect('/login');
         }
         else {
             bcrypt.compare(password, existingUser.password)
             .then(isValid => {
-                console.log(isValid);
+                console.log("user valid:", isValid);
                 if (isValid) {
+                    if (!cookieShouldPersist) {
+                        req.session.cookie.originalMaxAge = 30 * 60 * 60;
+                    }
                     req.session.isLoggedIn = true;
                     req.session.user = true;
-                    console.log(`user ${email} : ${password} entered`);
+                    if (existingUser.isAdmin) {
+                        req.session.isAdmin = true;
+                    }
+                    console.log(`user ${email} : ${password} entered, isAdmin === ${existingUser.isAdmin}`);
                     res.redirect('/');
                 }
                 else {
+                    req.flash('error', 'Invalid password.');
                     res.redirect('/login');
                 }
             })
@@ -57,7 +64,7 @@ exports.getSignup = (req, res, next) => {
     res.render('auth/signup', {
       path: '/signup',
       pageTitle: 'Signup',
-      isAuthenticated: false
+      errorMessage: req.flash('error')
     });
 };
 
@@ -68,6 +75,7 @@ exports.postSignup = (req, res, next) => {
     
     User.findUserByEmail(email, existingUser => {
         if (existingUser) {
+            req.flash('error', 'User already exists.');
             res.redirect('/signup');
         }
         else {
@@ -83,11 +91,6 @@ exports.postSignup = (req, res, next) => {
         }
     })
 };
-
-handleUserExists = function () {
-    
-}
-
 
 exports.postLogout = (req, res, next) => {
     req.session.destroy(err => {

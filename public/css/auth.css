@@ -11,3 +11,9 @@
     margin: auto;
     display: block;
 }
+
+.rememberMe::after {
+   margin: auto;
+   content: "\A\A";
+   white-space: pre;
+}

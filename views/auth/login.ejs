@@ -8,15 +8,22 @@
 
     <main>
         <form class="login-form" action="/login" method="POST">
+            <% if (errorMessage) { %>
+                <div class="form-control" style="color: red;"><%= errorMessage %></div>
+            <% } %>
             <div class="form-control">
                 <label for="email">Email Address</label>
-                <input type="email" name="email" id="email">
+                <input type="text" name="email" id="email">
             </div>
             <div class="form-control">
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password">
             </div>
-
+            
+            <input type="checkbox" name="remember" id="remember">
+            <label class="rememberMe" for="remember">Remember Me</label>
+            
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button class="btn" type="submit">Login</button>
         </form>
     </main>
