@@ -20,6 +20,7 @@ module.exports = class User {
         this.email = email;
         this.password = password;
         this.cart = new Cart();
+        this.isAdmin = false;
     }
 
     save() {
@@ -38,8 +39,7 @@ module.exports = class User {
             const updatedUsers = users.filter(user => user.name !== userEmail);
             fs.writeFile(usersPath, JSON.stringify(updatedUsers), err => {
                 if (!err) {
-                    /** TODO: Handle multiple carts (for each user). */
-                    //Cart.removeuser(userId, userPrice);
+                
                 }
             })
         });

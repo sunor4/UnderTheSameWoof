@@ -1,0 +1,49 @@
+<%- include('../includes/head.ejs') %>
+  <link rel="stylesheet" href="/css/aboutUs.css">
+  </head>
+
+  <body>
+    <%- include('../includes/navigation.ejs') %>
+
+      <main>
+        <% if (isAuthenticated) { %>
+
+          <div class="about-section">
+            <img
+              src="https://previews.123rf.com/images/moonguitar/moonguitar1602/moonguitar160200025/52834461-pet-shop-logo-with-pet-paw-sign-for-pet-store-vector-illustration.jpg"
+              style="width:20rem">
+
+            <h1>We are: Under The Same Woof</h1>
+            <p>We specialize in providing nourishment and delightful supplements for your loved ones! </p>
+          </div>
+
+          <h2 style="text-align:center">Our Team</h2>
+          <div class="row">
+            <div class="column">
+              <div class="card">
+                <img src="https://stevedalepetworld.com/wp-content/uploads/2016/05/Geek-dog.jpg" alt="Jane"
+                  style="width:100%">
+                <div class="container">
+                  <h2>Or Daniel</h2>
+                  <p class="title">Tech</p>
+                  <p>3rd year CS student @ IDC RRIS</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="card">
+                <img
+                  src="https://imagesvc.meredithcorp.io/v3/jumpstartpure/image?url=https://cf-images.us-east-1.prod.boltdns.net/v1/static/6157254766001/f31d8fa7-019c-4251-ac68-714cc442d790/c53e06a0-2230-4f3f-bf25-3058a2424be4/1280x720/match/image.jpg&w=1280&h=720&q=90&c=cc"
+                  alt="John" style="width:100%">
+                <div class="container">
+                  <h2>Itai Ben Porat</h2>
+                  <p class="title">Tech</p>
+                  <p>3rd year CS student @ IDC RRIS</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
+      </main>
+      <%- include('../includes/end.ejs') %>

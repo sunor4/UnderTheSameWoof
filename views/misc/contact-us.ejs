@@ -1,0 +1,37 @@
+<%- include('../includes/head.ejs') %>
+  <link rel="stylesheet" href="/css/contactUs.css">
+  </head>
+
+  <body>
+    <%- include('../includes/navigation.ejs') %>
+
+      <main>
+        <% if (isAuthenticated) { %>
+
+          <h3>Contact Us</h3>
+
+          <div class="container">
+            <form action="/contact-us" method="POST">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name.." required>
+
+              <label for="country">Country</label>
+              <select id="country" name="country" required>
+                <option value="israel">Israel</option>
+                <option value="canada">Canada</option>
+                <option value="usa">USA</option>
+              </select>
+
+              <label for="description">What's on your mind?</label>
+              <textarea id="description" name="description" style="height:200px" required></textarea>
+              
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <input type="submit" value="Submit">
+              <% if (message) { %>
+                <div style="color: rgb(3, 214, 66);"><%= message %></div>
+              <% } %>
+            </form>
+          </div>
+          <% } %>
+      </main>
+      <%- include('../includes/end.ejs') %>

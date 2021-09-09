@@ -40,6 +40,13 @@ form {
   align-items: center;
 }
 
+.main-header img {
+  width: 50px;
+  height: 45px;
+  display: block;
+  mix-blend-mode: luminosity;
+}
+
 .main-header__nav {
   height: 100%;
   width: 100%;
